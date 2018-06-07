@@ -1,0 +1,6 @@
+{
+	"scripts": {
+		"test": "npm run liferay",
+		"liferay": "echo Hello World"
+	}
+}
