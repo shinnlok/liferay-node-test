@@ -1,14 +1,29 @@
-buildscript {
-    dependencies {
-        classpath group: "com.liferay", name: "com.liferay.gradle.plugins.node", version: "4.3.4"
-    }
+import com.liferay.gradle.plugins.app.docker.AppDockerPlugin
 
-    repositories {
-        maven {
-            url "https://cdn.lfrs.sl/repository.liferay.com/nexus/content/groups/public"
-        }
-    }
+buildscript {
+	dependencies {
+		classpath group: "com.bmuschko", name: "gradle-docker-plugin", version: "3.2.4"
+		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.app.docker", version: "1.0.4"
+	}
+
+	repositories {
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+	}
 }
 
-apply plugin: "com.liferay.node"
-apply plugin: "java"
+apply plugin: AppDockerPlugin
+
+appDocker {
+	imageTags = ["hello"]
+	imageName = "shinntest/testdocker"
+	inputDir = "docker"
+}
+
+docker {
+	registryCredentials {
+		username = "shinntest"
+		password = "shinn123"
+	}
+}
